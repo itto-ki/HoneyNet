@@ -1,0 +1,3 @@
+[submodule "honeynet-cowrie/cowrie"]
+	path = honeynet-cowrie/cowrie
+	url = git@github.com:itto-ki/cowrie.git
