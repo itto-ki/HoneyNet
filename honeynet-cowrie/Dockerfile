@@ -15,14 +15,14 @@ RUN chown -R ${COWRIE_USER}:${COWRIE_GROUP} ${COWRIE_HOME}
 
 RUN apt-get update && \
     apt-get install -y \
+    authbind \
+    build-essential \
     git \
-    python-virtualenv \
     libssl-dev \
     libffi-dev \
-    build-essential \
     libpython3-dev \
-    python3-minimal \
-    authbind && \
+    python-virtualenv \
+    python3-minimal && \
     su - ${COWRIE_USER} -c "\
     cd cowrie && \
     virtualenv --python=python3 cowrie-env && \
