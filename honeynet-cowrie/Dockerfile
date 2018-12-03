@@ -47,13 +47,15 @@ RUN apt-get update && \
     libssl-dev \
     libffi-dev \
     procps \
-    python3
+    python3 \
+    supervisor
 
+COPY supervisord.conf /etc/supervisord.conf
 COPY --from=builder ${COWRIE_HOME} ${COWRIE_HOME}
 RUN chown -R ${COWRIE_USER}:${COWRIE_GROUP} ${COWRIE_HOME}
 
 USER ${COWRIE_USER}
 VOLUME ["/cowrie/cowrie/var", "/cowrie/cowrie/etc/"]
-ENTRYPOINT ["cowrie/bin/cowrie"]
-CMD ["start", "-n"]
+ENTRYPOINT ["supervisord"]
+CMD ["-c", "/etc/supervisord.conf", "-e", "critical"]
 EXPOSE 2222 2223
