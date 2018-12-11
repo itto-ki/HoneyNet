@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: cowrie-rs
+  labels:
+    app: cowrie
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cowrie
+  template:
+    metadata:
+      labels:
+        app: cowrie
+    spec:
+      containers:
+        - name: cowrie
+          image: gcr.io/honeypots-network/honeynet-cowrie:0.3
+          ports:
+            - containerPort: 2222
+              name: ssh
+              protocol: TCP
+            - containerPort: 2223
+              name: telnet
+              protocol: TCP
